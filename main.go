@@ -54,11 +54,15 @@ func main() {
 		os.Exit(1)
 	}
 
-	mux := http.NewServeMux()
+	// 1. Router erstellen
+	router := http.NewServeMux()
 
-	mux.Handle("/assets/", http.FileServer(http.FS(assets)))
+	// 2. Handler registrieren
+	//    a) File Server
+	router.Handle("/assets/", http.FileServer(http.FS(assets)))
+	//    b) Index Template Handler
+	router.HandleFunc("/", indexHandler)
 
-	mux.HandleFunc("/", indexHandler)
-
-	http.ListenAndServe(":8080", mux)
+	// 3. Server mit Router starten
+	http.ListenAndServe(":8080", router)
 }
