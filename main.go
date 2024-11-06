@@ -11,6 +11,6 @@ func catAPIHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	http.HandleFunc("/api/cat", catAPIHandler)
+	http.HandleFunc("/api/cats", catAPIHandler)
 	http.ListenAndServe(":8090", nil)
 }
